@@ -31,8 +31,8 @@ class Product(models.Model):
     prd_shipping = models.CharField(max_length=20, blank=True, null=True)
     prd_benefit = models.CharField(max_length=100, blank=True, null=True)
     prd_gift = models.CharField(max_length=100, blank=True, null=True)
-    rev_avg = models.CharField(max_length=20, blank=True, null=True)
-    rev_cnt = models.CharField(max_length=20, blank=True, null=True)
+    rev_avg = models.FloatField(blank=True, null=True)
+    rev_cnt = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False

@@ -4,3 +4,7 @@ from django.http import HttpResponse
 def index(request):
     return render(
         request, 'cjmall/index.html', { } )
+
+def list(request):
+    return render(
+        request, 'cjmall/list.html', { } )
