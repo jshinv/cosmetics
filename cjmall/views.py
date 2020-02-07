@@ -6,9 +6,9 @@ def index(request):
     return render(
         request, 'cjmall/index.html', { } )
 
-def lists(request):
+def datas(request):
     return render(
-        request, 'cjmall/list.html', { } )
+        request, 'cjmall/datas.html', { } )
 
 def crawling(request):
     get_data()
