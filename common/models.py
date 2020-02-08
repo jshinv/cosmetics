@@ -6,8 +6,6 @@ class Brand(models.Model):
     brd_name = models.CharField(max_length=20, blank=True, null=True)
     objects = models.Manager()
 
-    def __str__(self):
-        return self.name
     class Meta:
         managed = True
         db_table = 'brand'
@@ -18,10 +16,7 @@ class Common(models.Model):
     brd = models.ForeignKey(Brand, models.DO_NOTHING, blank=True, null=True)
     com_name = models.CharField(max_length=100, blank=True, null=True)
     com_img = models.CharField(max_length=1000, blank=True, null=True)
-    objects = models.Manager()
 
-    def __str__(self):
-        return self.name
     class Meta:
         managed = True
         db_table = 'common'
@@ -40,10 +35,8 @@ class Product(models.Model):
     prd_gift = models.CharField(max_length=100, blank=True, null=True)
     rev_avg = models.FloatField(blank=True, null=True)
     rev_cnt = models.IntegerField(blank=True, null=True)
-    objects = models.Manager()
 
-    def __str__(self):
-        return self.name
+
     class Meta:
         managed = True
         db_table = 'product'
