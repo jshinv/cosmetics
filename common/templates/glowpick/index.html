@@ -189,12 +189,34 @@
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Keword Rank</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div>
-                                        <canvas id="pie-chart"></canvas>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                              <tbody>
+                                                <tr>
+                                                    <td>등수</td>
+                                                    <td>키워드</td>
+                                                    <td>점수</td>
+                                                    <td>리뷰수</td>
+                                                </tr>
+                                                
+                                                {% for rank in topfive %}
+                                                <tr>
+                                                    <td>{{forloop.counter}}</td>
+                                                    <td>{{rank.0}}</td>
+                                                    <td>{{rank.1.0}}</td>
+                                                    <td>{{rank.1.2}}</td>
+                                                </tr>
+                                                {% endfor %}
+                                              </tbody>
+                                            </table>
+                                            
+                                        
+                                        <!-- <canvas id="pie-chart"></canvas> -->
                                     </div>
                                 </div>
                             </div>

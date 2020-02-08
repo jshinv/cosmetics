@@ -28,8 +28,33 @@ def analysis(request):
     kewords.pop('-')
     kewords.pop('단종')
     kewords = sorted(kewords.items(), key=lambda x: x[1], reverse=True)
-    print(kewords)
-    return HttpResponse(kewords)
+
+    ranklist=dict()
+    for word in kewords:
+        objlist=Product.objects.filter(prd_name_shop__contains=word[0])
+        word_review=[]
+        total_rating=0
+        idx=0
+        for obj in objlist:
+            revlist=Review.objects.filter(prd_id=obj.prd_id)
+            for rev in revlist:
+                word_review.append(rev.review_text)
+                total_rating+=rev.review_rating
+                idx+=1
+        if idx>100 :
+            ranklist[word[0]]=[int(total_rating//idx),total_rating,idx,word_review]
+
+    #sales_rank = sorted(sales_rank.items(), key=lambda x: x[1][0], reverse=True)
+    ranklist = sorted(ranklist.items(), key=lambda x: x[1][0], reverse=True)
+    topfive=list()
+    for i in range(5):
+        topfive.append(ranklist[i])
+            
+    return render(
+        request,
+            'glowpick/index.html',
+            {'topfive':topfive}
+    )
    
             
 def index(request):
