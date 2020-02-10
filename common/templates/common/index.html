@@ -220,7 +220,8 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                  <canvas id="price-chart" data-url="{% url 'price-chart' %}"></canvas>
+                  <!-- <canvas id="price-chart" data-url="{% url 'price-chart' %}"></canvas> -->
+                  <img src = "{% static 'common/img/price.png' %}" style="width:100%;">
                 </div>
               </div>
             </div>
@@ -233,8 +234,9 @@
                   <h6 class="m-0 font-weight-bold text-primary">리뷰 그래프</h6>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body">
-                  <canvas id="review-chart" data-url="{% url 'review-chart' %}"></canvas>
+                <div class="card-body" style="margin:auto;">
+                  <!-- <canvas id="review-chart" data-url="{% url 'review-chart' %}"></canvas> -->
+                  <img src = "{% static 'common/img/review.png' %}" style="width:600px;">
                 </div>
               </div>
             </div>
