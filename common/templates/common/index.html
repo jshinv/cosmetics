@@ -49,7 +49,8 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Shops</h1>
+            <h1 class="h3 mb-0 text-gray-800">Shops<span style="font-size:16px; margin-left:10px">GS-SHOP | AP-Mall | Glowpick</span></h1>
+
             <style>
               .update_button li{
                 list-style:none;
@@ -240,21 +241,18 @@
           </div>
 
           <!-- Content Row -->
-          <div class="row">
-            <!-- Content Column -->
+          <!-- <div class="row">
             <div class="col-md-12">
               <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">리뷰 그래프</h6>
                 </div>
-                <!-- Card Body -->
                 <div class="card-body">
                   <canvas id="chart3" data-url="{% url 'chart3' %}"></canvas>
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
 
           <!-- Content Row -->
@@ -287,6 +285,24 @@
                 <!-- Card Body -->
                 <div class="card-body" style="margin:auto">
                   <img src = "{% static 'common/img/ap_mall.jpeg' %}" style="width:600px;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Content Row -->
+          <div class="row">
+            <!-- Content Column -->
+            <div class="col-md-12">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">[Glowpick]</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <img src = "{% static 'common/img/glowpick.png' %}" style="width:100%;">
                 </div>
               </div>
             </div>

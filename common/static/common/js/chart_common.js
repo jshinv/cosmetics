@@ -22,8 +22,7 @@ $(function () {
             position: 'top',
           },
           title: {
-            display: true,
-            text: 'Price Bar Chart'
+            display: true
           }
         }
       });
@@ -56,8 +55,7 @@ $(function () {
             position: 'top',
           },
           title: {
-            display: true,
-            text: 'Price Bar Chart'
+            display: true
           }
         }
       });
@@ -90,8 +88,7 @@ $(function () {
               label: 'Scatter Dataset',
               backgroundColor: 'rgb(255, 99, 132)',
               data: [
-                {x:'2012.12.09', y:10},
-                {x:'2012.12.30', y:14},
+                data_list
               ]
               // data: data_list
           }]
