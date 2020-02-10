@@ -36,9 +36,9 @@ def price_chart(request):
     
     return JsonResponse(data={
         'labels': labels,
-        'data': data
+        'data': data,
     })
-
+    
 def review_chart(request):
     labels = []
     # 상품명을 라벨로 둔다

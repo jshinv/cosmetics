@@ -38,7 +38,7 @@ $(function () {
     url: $populationChart.data("url"),
     success: function (data) {
 
-      var ctx = $populationChart[0].getContext("2d");
+      var ctx = $populationChart[0];
       new Chart(ctx, {
         type: 'bar',
         data: {
