@@ -92,7 +92,7 @@ def get_data():
 
 
 
-    for prd_num in prd_num_datas:
+    for prd_num in prd_num_datas[:3]:
         driver.get(link_1 + prd_num + link_2 + brand_num + link_3)
         # driver.navigate().to(link_1 + prd_num + link_2 + brand_num + link_3) 
         time.sleep(0.2)
@@ -189,7 +189,7 @@ def get_data():
     print(len(cjmall_list_datas))
     print(len(cjmall_detail_datas))
 
-
+    
     for cjmall_detail_data in cjmall_detail_datas:
         prd_name_shop = cjmall_detail_data['title']     # 상품명
         prd_price = cjmall_detail_data['price']          # 상품가격
@@ -206,22 +206,24 @@ def get_data():
             prd_discount=prd_discount,
             prd_benefit=prd_benefit,
         ).save()
+        time.sleep(0.2)
 
-    time.sleep(0.2)
+    
+        for cjmall_review_data in cjmall_review_datas:
+            review_title = cjmall_review_data['review_title']
+            review_rating = cjmall_review_data['rating']
+            review_text = cjmall_review_data['comment']
+            review_userid = cjmall_review_data['writer']
+            review_date = cjmall_review_data['date']
 
-    for cjmall_review_data in cjmall_review_datas:
-        review_title = cjmall_review_data['review_title']
-        review_rating = cjmall_review_data['rating']
-        review_text = cjmall_review_data['comment']
-        review_userid = cjmall_review_data['writer']
-        review_date = cjmall_review_data['date']
+            Review(
+                prd=Product.objects.last(),
+                review_title=review_title,
+                review_rating=review_rating,
+                review_text=review_text,
+                review_userid=review_userid,
+                review_date=review_date,
+                ).save()
 
-        Review(
-            review_title=review_title,
-            review_rating=review_rating,
-            review_text=review_text,
-            review_userid=review_userid,
-            review_date=review_date,
-            ).save()
-
-    time.sleep(0.2)
+        time.sleep(0.2)
+        print("저장되었습니다")

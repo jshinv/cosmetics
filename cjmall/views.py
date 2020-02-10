@@ -21,19 +21,19 @@ def pie_chart(request):
     labels = []
     data = []
 
-    queryset = Review.objects.order_by('-review_date')[:5]
+    queryset = Review.objects.order_by('-review_date')
     
-    for date in queryset:
-        labels.append(review.review_date)
+    for rdate in queryset:
+        labels.append(rdate.review_date)
         # 라벨에는 리뷰 테이블의 날짜를 찍어줘라
-        data.append(review.count())
-        # 데이타에는 리뷰의 갯수를 찍어줘라
+        # data.append(rdate.count(review_id))
+        # # 데이타에는 리뷰의 갯수를 찍어줘라
 
     return render(
-        request, 'cjmall/index.html',
+        request, 'cjmall/datas.html',
         {
         'labels': labels,
-        'data': data,
+        'data': data
     })
 
 

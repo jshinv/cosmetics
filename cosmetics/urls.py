@@ -12,7 +12,7 @@ from innimall import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index),
-    path('shop/', include('common.urls')),
+    path('shop', include('common.urls')),
     path('shop/cjmall', include('cjmall.urls')),
     path('shop/glowpick', include('glowpick.urls')),
     path('shop/gsshop', include('gsshop.urls')),
