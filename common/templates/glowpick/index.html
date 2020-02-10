@@ -230,7 +230,19 @@
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">리뷰 등록일</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        {% extends 'blog/base.html' %}
+
+
+                                        {% load static from staticfiles %}
+                                        {% block content %}
+
+
+
+                                        <div class="container">
+                                            <img  src="/static/img/temp.jpg" alt="">
+                                        </div>
+                                    </h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="card-body">

@@ -15,8 +15,86 @@ import datetime
 import time
 import re
 import operator
+from matplotlib import pyplot
+import numpy
 
-def analysis(request):
+
+
+
+def visible(request):
+    product_data = Product.objects.all()
+    review_data = Review.objects.all()
+    review_agv =  Review.objects.count() // Product.objects.count()
+
+    product_title_list=Product.objects.values('prd_name_shop')
+    kewords={}
+    for product_title in product_title_list:
+        title= re.sub('[0123456789-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]',' ',product_title['prd_name_shop'])
+        for word in set(title.split(" ")):
+            count=kewords.get(word,0)
+            kewords[word]=count+1
+    kewords.pop('')
+    kewords.pop('-')
+    kewords.pop('단종')
+    kewords = sorted(kewords.items(), key=lambda x: x[1], reverse=True)
+
+    ranklist=dict()
+    for word in kewords:
+        objlist=Product.objects.filter(prd_name_shop__contains=word[0])
+        word_review=[]
+        total_rating=0
+        idx=0
+        for obj in objlist:
+            revlist=Review.objects.filter(prd_id=obj.prd_id)
+            for rev in revlist:
+                word_review.append(rev.review_text)
+                total_rating+=rev.review_rating
+                idx+=1
+        if idx>100 :
+            ranklist[word[0]]=[int(total_rating//idx),total_rating,idx,word_review]
+
+    #sales_rank = sorted(sales_rank.items(), key=lambda x: x[1][0], reverse=True)
+    ranklist = sorted(ranklist.items(), key=lambda x: x[1][0], reverse=True)
+  
+    wordlist=[]
+    ratinglist=[]
+    reviewlist=[]
+    for i in range(10):
+        wordlist.append(ranklist[i])
+        ratinglist.append(ranklist[i][1][0])
+        reviewlist.append(ranklist[i][1][2])
+ 
+    pyplot.rcParams["font.family"] = 'Malgun Gothic'
+    pyplot.rcParams["font.size"] = 12
+    pyplot.rcParams["figure.figsize"] = (10, 8)
+    pyplot.figure()
+
+    x = numpy.arange(len(wordlist))
+    pyplot.bar(x-0.0, ratinglist, label='별점', width=0.2, color='#dd0000')
+    pyplot.bar(x+0.2, reviewlist, label='리뷰수', width=0.2, color='#ddff00')
+    pyplot.xticks(x, wordlist) #좌표에 지절될 라벨 설정
+
+    pyplot.legend() #범주 표시
+    pyplot.xlabel('keword') #기준축(x축) 라벨 설정
+    pyplot.ylabel('수') #데이터축(y축) 라벨 설정
+    pyplot.ylim(0, 150) #데이터축 범위 설정
+    pyplot.title('Keyword 별 아몰랑') #그래프 설정
+
+    pyplot.savefig('/Users/DaeHyeon/lastproject/cosmetics/image/temp.png')
+    pyplot.close()
+    return alert('완료')
+
+
+
+
+
+
+            
+def index(request):
+    product_data = Product.objects.all()
+    review_data = Review.objects.all()
+    review_agv =  Review.objects.count() // Product.objects.count()
+
     product_title_list=Product.objects.values('prd_name_shop')
     kewords={}
     for product_title in product_title_list:
@@ -53,20 +131,10 @@ def analysis(request):
     return render(
         request,
             'glowpick/index.html',
-            {'topfive':topfive}
-    )
-   
-            
-def index(request):
-    product_data = Product.objects.all()
-    review_data = Review.objects.all()
-    review_agv =  Review.objects.count() // Product.objects.count()
-    return render(
-        request,
-            'glowpick/index.html',
             {   'product_data': product_data,
                 'review_data': review_data,
-                'review_agv' : review_agv
+                'review_agv' : review_agv,
+                'topfive':topfive
             }
     )
 
