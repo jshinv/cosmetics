@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'cosmetics.wsgi.application'
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'cosmetics_all',
+    'NAME': 'cosmetics',
     'USER': 'root',
     'PASSWORD': '1234',
     'HOST': 'localhost',
