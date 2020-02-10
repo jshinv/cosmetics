@@ -73,16 +73,27 @@ $(function () {
     url: $populationChart.data("url"),
     success: function (data) {
       var ctx = $populationChart[0].getContext("2d");
+
+      data_list = []
+      for(var i = 0; i < 10; i++) {
+        obj = {}
+        obj['x'] = data.labels[i]
+        obj['y'] = data.data[i]
+        data_list.push(obj)
+      }
+      console.log(data_list)
+
       new Chart(ctx, {
         type: 'scatter',
         data: {
           datasets: [{
               label: 'Scatter Dataset',
               backgroundColor: 'rgb(255, 99, 132)',
-              data: [{
-                  x: 120,
-                  y: 12
-              }]
+              data: [
+                {x:'2012.12.09', y:10},
+                {x:'2012.12.30', y:14},
+              ]
+              // data: data_list
           }]
         },
         options: {

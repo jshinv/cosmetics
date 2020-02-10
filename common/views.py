@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from common.models import *
-from django.db.models import Sum
+from django.db.models import Sum, Count
 
 def index(request):
     product_data = Product.objects.all()
@@ -59,20 +59,19 @@ def review_chart(request):
 def chart3(request):
     labels = [] # 리뷰 등록날짜
     data = [] # 등록된 리뷰갯수
-    
-    queryset = Review.objects.all()
 
-    print(queryset)
+    queryset = Review.objects.values('review_date').annotate(
+        cnt = Count('review_date'),
+    )
 
-    # for entry in queryset:
-    #     print(queryset.get(review_date=entry['review_date']).count())
+    for row in queryset:
+        labels.append(row['review_date'])
+        data.append(row['cnt'])
 
-    #     # labels.append(entry['review_date'])
-    #     # data.append(entry['review_total'])
-    #     # 위에 작성한 annotate (리뷰수 합계)
-    
+
+    print(labels)    
+    print(data)    
     return JsonResponse(data={
         'labels': labels,
         'data': data
-
     })
